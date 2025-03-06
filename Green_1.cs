@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,12 +33,17 @@ namespace Lab_6
             public string Trainer => trainer;
             public double Result => result;
 
-            public bool HasPassed => result > 0 && result >= standart;
+            public bool HasPassed => result > 0 && result <= standart;
             public static int PassedTheStandard => passedCount;
 
 
             public void Run(double result)
             {
+                if (result <= 0)
+                {
+                    Console.WriteLine("неккоректный резульатат");
+                    return;
+                }
                 if (this.result == 0)
                 {
                     this.result = result;
@@ -46,6 +51,10 @@ namespace Lab_6
                     {
                         passedCount++;
                     }
+                }
+                else
+                {
+                    Console.WriteLine("уже есть");
                 }
             }
 
