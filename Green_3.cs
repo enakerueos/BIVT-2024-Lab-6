@@ -57,20 +57,19 @@ namespace Lab_6
 
             public static void SortByAvgMark(Student[] array)
             {
-                if (array == null || array.Length == 0)
+                if (array == null)
                 {
                     return;
                 }
-
                 for (int i = 0; i < array.Length - 1; i++)
                 {
-                    for (int j = i + 1; j < array.Length; j++)
+                    for (int j = 0; j < array.Length - 1 - i; j++)
                     {
-                        if (array[i].AvgMark < array[j].AvgMark)
+                        if (array[j].AvgMark < array[j + 1].AvgMark)
                         {
-                            Student temp = array[i];
-                            array[i] = array[j];
-                            array[j] = temp;
+                            Student temp = array[j];
+                            array[j] = array[j + 1];
+                            array[j + 1] = temp;
                         }
                     }
                 }
