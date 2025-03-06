@@ -15,7 +15,7 @@ namespace Lab_6
             private string surname1;
             private int[] marks1;
             private bool isExpelled1;
-
+            private int cnt_ex;
 
 
             public double AvgMark
@@ -51,7 +51,7 @@ namespace Lab_6
                 surname1 = surname;
                 marks1 = new int[3] { 0, 0, 0 };
                 isExpelled1 = false;
-
+                cnt_ex = 0;
             }
 
 
@@ -61,9 +61,10 @@ namespace Lab_6
                 {
                     return;
                 }
-                for (int i = 0; i < array.Length - 1; i++)
+                int n = array.Length;
+                for (int i = 0; i < n - 1; i++)
                 {
-                    for (int j = 0; j < array.Length - 1 - i; j++)
+                    for (int j = 0; j < n - 1 - i; j++)
                     {
                         if (array[j].AvgMark < array[j + 1].AvgMark)
                         {
@@ -77,34 +78,24 @@ namespace Lab_6
 
             public void Exam(int mark)
             {
-                if (isExpelled1)
-                {
-                    return;
-                }
-
-                if (mark < 2 || mark > 5)
-                {
-                    Console.WriteLine("Оценка должна быть от 2 до 5.");
-                    return;
-                }
-
-                if (mark == 2)
-                {
-                    isExpelled1 = true;
-                    return;
-                }
+                if (marks1 == null) return;
 
 
-                int index = 0;
-                index = Array.IndexOf(marks1, 0);
-                if (index != -1)
+                if (isExpelled1) return;
+
+                if (cnt_ex >= 3)return;
+                if (mark >= 2 && mark <= 5)
                 {
-                    marks1[index] = mark;
+                    marks1[cnt_ex] = mark;
+                    cnt_ex++;
                 }
                 else
                 {
-                    Console.WriteLine("все оценки получены");
+                    marks1[cnt_ex] = mark;
+                    cnt_ex++;
+                    isExpelled1 = true;
                 }
+                if (mark <= 2) isExpelled1 = true;
             }
 
 
