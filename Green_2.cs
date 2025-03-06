@@ -20,12 +20,6 @@ namespace Lab_6
             public string Surname => surname1;
             public int[] Marks => marks1;
 
-            public Student(string name, string surname)
-            {
-                name1 = name;
-                surname1 = surname;
-                marks1 = new int[4] { 0, 0, 0, 0 };
-            }
             public bool IsExcellent
             {
                 get
@@ -57,7 +51,12 @@ namespace Lab_6
                 }
             }
 
-
+            public Student(string name, string surname)
+            {
+                name1 = name;
+                surname1 = surname;
+                marks1 = new int[4] { 0, 0, 0, 0 };
+            }
 
             public void Exam(int mark)
             {
@@ -86,16 +85,16 @@ namespace Lab_6
                 {
                     return;
                 }
-
-                for (int i = 0; i < array.Length - 1; i++)
+                int n = array.Length;
+                for (int i = 0; i < n - 1; i++)
                 {
-                    for (int j = i + 1; j < array.Length; j++)
+                    for (int j = 0; j < n - i - 1; j++)
                     {
-                        if (array[i].AvgMark < array[j].AvgMark)
+                        if (array[j].AvgMark < array[j + 1].AvgMark)
                         {
-                            Student t = array[i];
-                            array[i] = array[j];
-                            array[j] = t;
+                            Student vrem = array[j];
+                            array[j] = array[j + 1];
+                            array[1 + j] = vrem;
                         }
                     }
                 }
