@@ -18,8 +18,41 @@ namespace Lab_6
 
             public string Name => name1;
             public string Surname => surname1;
-            public int[] Marks => marks1;
+            public int[] Marks
+            {
+                get
+                {
+                    if (marks1 == null) return null;
+                    int[] arrays = new int[marks1.Length];
+                    Array.Copy(marks1, arrays, marks1.Length);
+                    return arrays;
+                }
+            }
 
+            
+            public double AvgMark
+            {
+                get
+                {
+                    int cnt = 0;
+                    if (marks1 == null) return 0;
+
+                    double sum = 0;
+
+                    foreach (int mark in marks1)
+                    {
+                        if (mark != 0)
+                        {
+                            sum += mark;
+                            cnt++;
+                        }
+                    }
+                    if (cnt == 0)
+                        return 0;
+
+                    return sum / cnt;
+                }
+            }
             public bool IsExcellent
             {
                 get
@@ -34,23 +67,6 @@ namespace Lab_6
                     return true;
                 }
             }
-            public double AvgMark
-            {
-                get
-                {
-                    double sum = 0;
-                    foreach (var mark in marks1)
-                    {
-                        sum += mark;
-                    }
-                    if (marks1.Length == 0)
-                    {
-                        return 0;
-                    }
-                    return sum / marks1.Length;
-                }
-            }
-
             public Student(string name, string surname)
             {
                 name1 = name;
