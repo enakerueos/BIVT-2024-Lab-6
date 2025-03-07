@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Lab_6
@@ -10,75 +11,85 @@ namespace Lab_6
     {
         public struct Student
         {
-            private string _name;
-            private string _surname;
-            private int[] _marks;
+            private string name1;
+            private string surname1;
+            private int[] marks1;
 
-            public string Name => _name;
-            public string Surname => _surname;
+
+            public string Name => name1;
+            public string Surname => surname1;
             public int[] Marks
             {
                 get
                 {
-                    if (_marks == null) return null;
-                    int[] arr = new int[_marks.Length];
-                    Array.Copy(_marks, arr, _marks.Length);
-                    return arr;
+                    if (marks1 == null) return null;
+                    int[] arrays = new int[marks1.Length];
+                    Array.Copy(marks1, arrays, marks1.Length);
+                    return arrays;
                 }
             }
+
+            
             public double AvgMark
             {
                 get
                 {
-                    if (_marks == null) return 0;
+                    int cnt = 0;
+                    if (marks1 == null) return 0;
 
                     double sum = 0;
-                    int k = 0;
-                    foreach (int mark in _marks)
+
+                    foreach (int mark in marks1)
                     {
                         if (mark != 0)
                         {
                             sum += mark;
-                            k++;
+                            cnt++;
                         }
                     }
-                    if (k == 0) return 0;
-                    return sum / k;
+                    if (cnt == 0)
+                        return 0;
+
+                    return sum / cnt;
                 }
             }
             public bool IsExcellent
             {
                 get
                 {
-                    if (_marks == null || _marks.Length == 0) return false;
-                    foreach (int mark in _marks)
+                    for (int i = 0; i < marks1.Length; i++)
                     {
-                        if (mark < 4)
+                        if (marks1[i] < 4)
+                        {
                             return false;
+                        }
                     }
                     return true;
                 }
             }
-
-
             public Student(string name, string surname)
             {
-                 _name = name;
-                _surname = surname;
-                _marks = new int[4];
+                name1 = name;
+                surname1 = surname;
+                marks1 = new int[4] { 0, 0, 0, 0 };
             }
 
             public void Exam(int mark)
             {
                 if (mark < 2 || mark > 5)
                 {
+                    Console.WriteLine("неправильные   оценки");
                     return;
                 }
-                for (int i = 0; i < _marks.Length; i++)
+                if (marks1.Length == 0 || marks1 == null)
                 {
-                    if (_marks[i] == 0)
+                    return;
+                }
+                for (int i = 0; i < marks1.Length; i++)
+                {
+                    if (marks1[i] == 0)
                     {
-                        _marks[i] = mark;
+                        marks1[i] = mark;
                         return;
                     }
                 }
@@ -90,16 +101,16 @@ namespace Lab_6
                 {
                     return;
                 }
-
-                for (int i = 0; i < array.Length - 1; i++)
+                int n = array.Length;
+                for (int i = 0; i < n - 1; i++)
                 {
-                    for (int j = 0; j < array.Length - 1 - i; j++)
+                    for (int j = 0; j < n - i - 1; j++)
                     {
                         if (array[j].AvgMark < array[j + 1].AvgMark)
                         {
-                            Student temp = array[j];
+                            Student vrem = array[j];
                             array[j] = array[j + 1];
-                            array[j + 1] = temp;
+                            array[1 + j] = vrem;
                         }
                     }
                 }
@@ -107,10 +118,10 @@ namespace Lab_6
 
             public void Print()
             {
-                Console.WriteLine($"Студент: {Name} {Surname}");
-                Console.WriteLine($"Оценки: {string.Join(", ", Marks)}");
-                Console.WriteLine($"Средний балл: {AvgMark:F2}");
-                Console.WriteLine($"Отличник: {(IsExcellent ? "Да" : "Нет")}");
+                Console.WriteLine($"КТо?: {Name} {Surname}");
+                Console.WriteLine(string.Join(", ", Marks));
+                Console.WriteLine($"СР Балл: {AvgMark:F2}");
+                Console.WriteLine(IsExcellent ? "Отличник" : "Не отличник");
                 Console.WriteLine();
             }
         }
