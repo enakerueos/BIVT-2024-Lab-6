@@ -42,7 +42,16 @@ namespace Lab_6
             public bool IsExpelled => isExpelled1;
             public string Name => name1;
             public string Surname => surname1;
-            public int[] Marks => marks1;
+            public int[] Marks
+            {
+                get
+                {
+                    if (marks1 == null) return null;
+                    int[] arrays = new int[marks1.Length];
+                    Array.Copy(marks1, arrays, marks1.Length);
+                    return arrays;
+                }
+            }
 
 
             public Student(string name, string surname)
@@ -83,7 +92,7 @@ namespace Lab_6
 
                 if (isExpelled1) return;
 
-                if (cnt_ex >= 3)return;
+                if (cnt_ex >= 3) return;
                 if (mark >= 2 && mark <= 5)
                 {
                     marks1[cnt_ex] = mark;
