@@ -57,6 +57,8 @@ namespace Lab_6
             {
                 get
                 {
+                    if (marks1 == null || marks1.Length == 0)
+                        return false;
                     for (int i = 0; i < marks1.Length; i++)
                     {
                         if (marks1[i] < 4)
